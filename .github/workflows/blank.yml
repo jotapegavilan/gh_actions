@@ -2,9 +2,8 @@ name: CI
 on: [push]
 
 env:
-  platform: Linux # O 'aws' según el momento del video
-  region: us-east-1 # Ejemplo basado en la explicación
-  account: 12345 # Ejemplo basado en la explicación
+  platform: aws # Se cambia para probar la condicional
+  # ... otras variables
 
 jobs:
   build:
@@ -12,9 +11,18 @@ jobs:
     steps:
       - name: Display message
         run: echo "Hola mundo"
-      
+
+      # Este paso solo corre si la plataforma coincide
       - name: Mostrando variables de entorno
+        if: ${{ env.platform == 'aws' }} 
         run: |
           echo "Este es el valor de platform: ${{ env.platform }}"
-          echo "Este es el valor de region: ${{ env.region }}"
-          echo "Este es el valor de account: ${{ env.account }}"
+          # ... otros echos
+
+      - name: Mostrando evento
+        run: echo "${{ toJSON(github.event) }}"
+
+      - name: Mostrando variables por defecto
+        run: |
+          echo "El actor es: ${{ github.actor }}"
+          echo "El repositorio es: ${{ github.repository }}"

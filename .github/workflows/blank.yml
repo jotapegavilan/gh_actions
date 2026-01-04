@@ -2,8 +2,7 @@ name: CI
 on: [push]
 
 env:
-  # Mapeo de secrets a variables de entorno
-  username: ${{ secrets.USERNAME }} 
+  username: ${{ secrets.USERNAME }}
   password: ${{ secrets.PASSWORD }}
   platform: aws
 
@@ -14,11 +13,9 @@ jobs:
       - name: Display message
         run: echo "Hola mundo"
 
-      # Paso condicional basado en Secrets
       - name: Mostrando valores solo si el usuario es correcto
         if: ${{ env.username == 'Fast' && env.password != '' }}
         run: echo "Si existe usuario y contraseña"
 
-      # Uso de variables de repositorio (no secrets)
       - name: Mostrando variable de repositorio
-        run: echo "Versión del proyecto: ${{ vars.PROJECT_VERSION }}"
+        run: echo 'Versión del proyecto:${{ vars.PROJECT_VERSION }}'

@@ -2,7 +2,7 @@ name: CI
 on: [push]
 
 env:
-  # Mapeo de secrets a variables de entorno para poder usarlos en condicionales
+  # Mapeo de secrets a variables de entorno
   username: ${{ secrets.USERNAME }} 
   password: ${{ secrets.PASSWORD }}
   platform: aws
